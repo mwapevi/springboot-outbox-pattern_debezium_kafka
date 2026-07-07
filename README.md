@@ -133,12 +133,11 @@ Almost like leaving a note on your own desk before walking out of the room.
 
 A separate process later reads the Outbox table and publishes those events.
 
-```text
 # Transactional Outbox Pattern
 
 ## Architecture Diagram
 
-![Transactional Outbox Pattern](docs/images/outbox_patterns.png)
+![Transactional Outbox Pattern](docs/Images/outbox_patterns.png)
 
 ```
 
