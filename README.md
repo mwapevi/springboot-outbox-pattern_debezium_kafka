@@ -306,7 +306,7 @@ It is watching how a simple database transaction gradually becomes part of a lar
 Clone the repository:
 
 ```bash
-git clone https://github.com/<your-username>/<repository-name>.git
+git clone https://github.com/mwapevi/springboot-outbox-pattern_debezium_kafka.git
 ```
 
 Start MySQL.
