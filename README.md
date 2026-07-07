@@ -132,14 +132,11 @@ It is stored.
 Almost like leaving a note on your own desk before walking out of the room.
 
 A separate process later reads the Outbox table and publishes those events.
-
 # Transactional Outbox Pattern
 
 ## Architecture Diagram
 
 ![Transactional Outbox Pattern](docs/images/outbox_patterns.png)
-
-```
 
 Simple. Slightly less glamorous than a distributed transaction.
 
@@ -151,61 +148,7 @@ Far more dependable.
 
 This is where the pattern earns its keep.
 
-Suppose Kafka is unavailable.
-
-The customer record is already committed.
-
-The Outbox record is already committed.
-
-The publisher attempts delivery.
-
-Delivery fails.
-
-Nothing disappears.
-
-The event remains in the Outbox table waiting for another attempt.
-
-A few minutes later the broker recovers.
-
-The publisher retries.
-
-The event is delivered.
-
-No manual intervention.
-
-No detective work.
-
-No uncomfortable production call asking whether data can be reconstructed from backups.
-
-The database already contains the answer.
-
----
-
-## A note about polling
-
-This first implementation uses a polling publisher.
-
-A scheduled process periodically scans the Outbox table and publishes pending events.
-
-Some engineers dislike polling immediately.
-
-I understand the reaction.
-
-Yet polling has one advantage that often gets overlooked.
-
-It is easy to understand.
-
-You can inspect the database.
-
-You can see pending events.
-
-You can trace failures.
-
-You can explain the entire mechanism on a whiteboard without opening five architecture diagrams.
-
-That simplicity is useful while learning the pattern.
-
----
+Suppose Kafka is unavailable...
 
 ## Current implementation
 
