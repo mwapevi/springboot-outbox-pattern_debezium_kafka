@@ -137,7 +137,7 @@ A separate process later reads the Outbox table and publishes those events.
 
 ## Architecture Diagram
 
-![Transactional Outbox Pattern](docs/Images/outbox_patterns.png)
+![Transactional Outbox Pattern](docs/images/outbox_patterns.png)
 
 ```
 
