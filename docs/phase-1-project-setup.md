@@ -32,8 +32,9 @@ Validation
 Jackson
 Mapstruct
 
-# 3 Project Structure
+# 4 Project Structure
 
+```text
 src
 └── main
 ├── java
@@ -55,8 +56,8 @@ src
     ├── application.properties
     ├── banner.txt
     └── schema.sql
-
-# 4 Configure MySQL Database
+```
+# 5 Configure MySQL Database
 
 application.properties:
 
@@ -75,30 +76,32 @@ Define the password Spring Boot will use to connect to MySQL database.
 ```properties
 spring.datasource.password=mysqlpassword
 ```
-# 5 Configure JPA
+# 6 Configure JPA
 
 ```properties
 spring.jpa.hibernate.ddl-auto=update
 spring.jpa.show-sql=true
 ```
 
-# 6 Verify the Connection
+# 7 Verify the Connection
 
 Verify and ensure that the DB connection completed successfully as follows:
+
 
 2026-07-08T23:13:32.175+02:00  INFO 18940 --- [Customer_Details] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
 2026-07-08T23:13:34.498+02:00  INFO 18940 --- [Customer_Details] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@18a096b5
 2026-07-08T23:13:34.500+02:00  INFO 18940 --- [Customer_Details] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
 ...Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
 
-# 7 Run the Application
+# 8 Run the Application
 
 Run the application (mvn spring-boot:run) and confirm that the application starts on port 6666 successfully.
 
 18940 --- [Customer_Details] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 6666 (http) with context path '/'
 2026-07-08T23:13:41.047+02:00  INFO 18940 --- [Customer_Details] [           main] c.c.CustomerDetailsApplication           : Started CustomerDetailsApplication in 16.691 seconds (process running for 19.255)
 
-# 8 Verify the REST Endpoint
+
+# 9 Verify the REST Endpoint
 
 Test:
 
@@ -108,9 +111,9 @@ Response:
 
 Application is running
 
-# 9 Screenshots
+# 10 Screenshots
 
-Please refer to the following image artifacts docs/artifacts/phase-1/
+Please refer to the following image artifacts in docs/artifacts/phase-1/
 
 Screenshots include:
 
@@ -119,7 +122,7 @@ Screenshots include:
 - **Application startup logs**
 - **Postman calling /api/health**
 
-# 10 What We achieved
+# 11 What We achieved
 
 At the end of this phase we have:
 
