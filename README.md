@@ -1,307 +1,290 @@
-# Reliable Event Publishing with the Transactional Outbox Pattern
+# MySQL CDC with the Transactional Outbox Pattern
 
-## Why this repository exists
-
-I have seen a surprising number of systems assume that saving data and publishing an event are effectively the same operation.
-
-They are not.
-
-A database transaction can succeed while a message broker is unavailable. A broker can acknowledge a message while the application crashes before the database commit. The gap between those two actions is small enough to ignore during development and large enough to cause problems in production.
-
-This repository explores that gap.
-
-The project starts with a straightforward implementation of the Transactional Outbox Pattern using Spring Boot and MySQL. Later iterations will introduce Change Data Capture (CDC) with Debezium and eventually Apache Kafka.
-
-The goal is not to build the most sophisticated event-driven platform possible. The goal is to build something reliable first, then evolve it in stages.
+> A hands-on project demonstrating reliable event publishing using the Transactional Outbox Pattern, with incremental integration of Debezium-Change Data Capture (CDC), and Apache Kafka.
 
 ---
 
-## The problem nobody notices at first
+# Project Overview
 
-Imagine a customer registration service.
+Modern distributed systems often rely on events to keep multiple services synchronized. A common mistake is assuming that saving data to a database and publishing an event are a single operation.
 
-A request arrives.
+In reality, these are two separate actions that can fail independently.
 
-The application saves a new customer record.
+Consider a customer registration service:
 
-Immediately afterward it publishes a `CustomerCreated` event.
+sequenceDiagram
+participant Client
+participant CustomerService
+participant MySQL
+participant Kafka
 
-At first glance this feels perfectly reasonable.
+    Client->>CustomerService: Create Customer
+    CustomerService->>MySQL: Insert Customer
+    MySQL-->>CustomerService: Commit Successful
 
-```java
-customerRepository.save(customer);
+    Note over CustomerService: Application crashes
 
-eventPublisher.publish(
-    new CustomerCreatedEvent(customer)
-);
+    CustomerService-xKafka: Publish Event
+
+    Note over Kafka: Event never received
+
+1. A customer is successfully saved to the database.
+2. An event should be published to notify other services.
+3. The application crashes before the event is sent.
+
+The customer now exists in the database, but no downstream system knows about it.
+
+This inconsistency is known as the **Dual-Write Problem**, and it becomes increasingly difficult to manage as systems grow.
+
+This repository explores one of the most widely adopted solutions to this challenge—the **Transactional Outbox Pattern**—and demonstrates how it evolves into a complete event-driven architecture using **Debezium** and **Apache Kafka**.
+
+Rather than building everything at once, the project is intentionally developed in phases, allowing each concept to be implemented, verified, and documented independently.
+
+---
+
+# Objectives
+
+The primary goals of this project are to:
+
+- Understand the Dual-Write Problem
+- Implement the Transactional Outbox Pattern
+- Ensure reliable event creation using a single database transaction
+- Integrate Debezium for Change Data Capture (CDC)
+- Publish events to Apache Kafka
+- Build an end-to-end event-driven workflow using modern technologies
+
+---
+
+# Technology Stack
+
+- Java 21
+- Spring Boot
+- Spring Data JPA
+- MySQL
+- Maven
+- Debezium *(Planned)*
+- Apache Kafka *(Planned)*
+- Docker *(Planned)*
+
+---
+
+# Project Architecture
+
+Current Architecture
+
+```
+       flowchart TD
+    A[REST API] --> B[Customer Service]
+    B --> C
+
+    subgraph C["Single Database Transaction"]
+        direction LR
+        D[(Customer Table)]
+        E[(Outbox Table)]
+    end
 ```
 
-Then reality intervenes.
+Future Architecture
 
-The database commit succeeds.
+```
+              flowchart TD
+    A[REST API] --> B[Customer Service]
+    B --> C
 
-Kafka is unavailable.
+    subgraph C["Single Database Transaction"]
+        direction LR
+        D[(Customer Table)]
+        E[(Outbox Table)]
+    end
 
-The application crashes.
+    E --> F[(MySQL Binlog)]
+    F --> G[Debezium CDC]
+    G --> H[(Kafka Topic)]
 
-Now the customer exists.
-
-The event does not.
-
-Nothing downstream knows that customer was created.
-
-Inventory systems miss updates. Notification services remain silent. Analytics data drifts away from reality.
-
-The database says one thing.
-
-The rest of the platform says another.
-
-That inconsistency is the dual-write problem.
-
-The term sounds technical. The failure mode is painfully ordinary.
-
-Two systems need to be updated.
-
-One succeeds.
-
-One fails.
-
----
-
-## Why not just use distributed transactions?
-
-In theory, distributed transactions solve the problem.
-
-In practice, most modern microservice platforms avoid them.
-
-They add coordination overhead.
-
-They increase coupling.
-
-They become difficult to reason about under failure conditions.
-
-I have rarely seen engineers become enthusiastic after hearing the phrase "two-phase commit."
-
-Most teams eventually look for something simpler.
-
----
-
-## Enter the Transactional Outbox Pattern
-
-The Outbox Pattern takes a different approach.
-
-Instead of trying to update the database and publish an event simultaneously, it treats event publication as data.
-
-That distinction matters.
-
-When a customer is created, the application writes two records inside the same database transaction.
-
-```text
-Customer Table
-      +
-Outbox Table
+    H --> I[Notification Service]
+    H --> J[Analytics Service]
 ```
 
-Both commits succeed.
+---
 
-Or neither does.
+# Project Progress
 
-No middle state exists.
-
-A simplified transaction looks like this:
-
-```sql
-BEGIN;
-
-INSERT INTO customer (...);
-
-INSERT INTO outbox (
-    event_id,
-    event_type,
-    payload,
-    created_at
-);
-
-COMMIT;
-```
-
-The event is not sent immediately.
-
-It is stored.
-
-Almost like leaving a note on your own desk before walking out of the room.
-
-A separate process later reads the Outbox table and publishes those events.
-# Transactional Outbox Pattern
-
-## Architecture Diagram
-
-![Transactional Outbox Pattern](docs/images/outbox_patterns.png)
-
-Simple. Slightly less glamorous than a distributed transaction.
-
-Far more dependable.
+| Phase | Description | Status |
+|--------|-------------|--------|
+| Phase 1 | Spring Boot Project Setup | ✅ Completed |
+| Phase 2 | Customer REST API | ✅ Completed |
+| Phase 3 | Transactional Outbox Pattern | ✅ Completed |
+| Phase 4 | Debezium CDC Integration | 🚧 In Progress |
+| Phase 5 | Apache Kafka Integration | ⏳ Planned |
+| Phase 6 | Consumer Services | ⏳ Planned |
 
 ---
 
-## What happens during failures?
+# Repository Roadmap
 
-This is where the pattern earns its keep.
+flowchart LR
+A[Spring Boot Setup ✅]
+B[REST API ✅]
+C[Transactional Outbox ✅]
+D[Debezium CDC 🚧]
+E[Apache Kafka ⏳]
+F[Consumer Services ⏳]
+G[Production Ready]
 
-Suppose Kafka is unavailable...
+    A --> B --> C --> D --> E --> F --> G
+---
 
-## Current implementation
+# Current Implementation
 
-Technology stack:
+The application currently supports:
 
-* Java
-* Spring Boot
-* Spring Data JPA
-* MySQL
-* Scheduled Event Publisher
+- Customer creation REST API
+- Transactional persistence of Customer and Outbox Event
+- Atomic database transactions using Spring's `@Transactional`
+- Event payload serialization
+- RESTful API design
+- MySQL persistence
 
-Implemented features:
+Customer creation endpoint:
 
-* Customer creation workflow
-* Transactional Outbox persistence
-* Atomic database transaction
-* Event serialization
-* Polling-based event publisher
-* Event status tracking
-* Retry-ready design
+```
+POST /api/v1/customer
+```
+
+During a single transaction the application performs:
+
+```
+flowchart TD
+    A[Create Customer]
+    B[Create Outbox Event]
+    C[Commit Transaction]
+
+    A --> B
+    B --> C
+```
+
+Both records are committed together.
+
+If the transaction fails, neither record is persisted, ensuring the database remains consistent.
+
+---
+# Transactional Outbox Flow
+
+The following sequence illustrates how the application guarantees reliable event creation.
+
+sequenceDiagram
+participant Client
+participant CustomerService
+participant MySQL
+
+    Client->>CustomerService: POST /api/v1/customer
+
+    CustomerService->>MySQL: Begin Transaction
+    CustomerService->>MySQL: Insert Customer
+    CustomerService->>MySQL: Insert Outbox Event
+    CustomerService->>MySQL: Commit Transaction
+
+    MySQL-->>CustomerService: Transaction Committed
+
+    CustomerService-->>Client: HTTP 201 Created
+---
+
+# Verification
+
+The current implementation has been verified by confirming that:
+
+- A customer record is successfully persisted.
+- A corresponding outbox event is created.
+- Both records are committed within the same transaction.
+- No partial writes occur.
+
+Artifacts demonstrating these results are available under the `docs` directory.
 
 ---
 
-## Example flow
+# Why the Outbox Pattern?
 
-A customer registration request arrives.
+Instead of attempting to update the database and publish an event simultaneously, the Transactional Outbox Pattern stores the event alongside the business data inside the same database transaction.
 
-```text
-POST /customers
-```
+This guarantees that:
 
-The application executes a single transaction.
+- Customer data and event information remain consistent.
+- Events are never published for failed transactions.
+- Failed event publication can be retried without losing business data.
+- Event delivery becomes resilient to infrastructure failures.
 
-```text
-1. Save Customer
-2. Save Outbox Event
-3. Commit Transaction
-```
-
-Later:
-
-```text
-Publisher
-    |
-    v
-Read Outbox Records
-    |
-    v
-Publish Event
-    |
-    v
-Mark As Published
-```
-
-The event eventually reaches downstream consumers.
-
-Not because the network behaved perfectly.
-
-Not because infrastructure never failed.
-
-Because the system was designed with failure in mind from the beginning.
+This approach removes the risk associated with dual writes while providing a reliable foundation for event-driven systems.
 
 ---
 
-## Roadmap
+# Next Phase: Debezium CDC
 
-This repository intentionally evolves in stages.
+The next milestone is integrating **Debezium**.
 
-### Phase 1 — Transactional Outbox
+Rather than polling the Outbox table, Debezium monitors the MySQL binary log and automatically captures committed database changes.
 
-Current phase.
+The expected event flow will become:
 
-Focus:
+```
+flowchart TD
+    A[Customer API]
+    B[MySQL Transaction]
+    C[(Outbox Table)]
+    D[(MySQL Binlog)]
+    E[Debezium CDC]
+    F[(Apache Kafka)]
 
-* Reliable event creation
-* Atomic persistence
-* Polling publisher
-* Event status management
-
----
-
-### Phase 2 — Debezium CDC
-
-Planned.
-
-Polling works, but it repeatedly asks the database whether something changed.
-
-Debezium takes a different route.
-
-Instead of querying tables, it reads the MySQL binary log and captures changes directly.
-
-Expected additions:
-
-* Debezium
-* Kafka Connect
-* MySQL Binlog integration
-* Automatic Outbox event capture
-
-Architecture:
-
-```text
-MySQL
-   |
-   v
-Binlog
-   |
-   v
-Debezium
-   |
-   v
-Kafka
+    A --> B
+    B --> C
+    C --> D
+    D --> E
+    E --> F
 ```
 
-The application becomes smaller because event publication no longer depends on a polling scheduler.
+This removes the need for scheduled polling and enables near real-time event streaming.
 
 ---
 
-### Phase 3 — Apache Kafka
+# Future Enhancements
 
-Planned.
+---
+# End-to-End Event Flow (Target Architecture)
 
-At this stage the repository moves beyond reliable event creation and into event streaming.
+flowchart LR
+A[REST API]
+B[Customer Service]
+C[(Customer Table)]
+D[(Outbox Table)]
+E[(MySQL Binlog)]
+F[Debezium]
+G[(Kafka Topic)]
+H[Notification Service]
+I[Analytics Service]
 
-Expected additions:
+    A --> B
+    B --> C
+    B --> D
+    D --> E
+    E --> F
+    F --> G
+    G --> H
+    G --> I
+---
 
-* Kafka Topics
-* Consumer Services
-* Retry Strategies
-* Dead Letter Queues
-* Event Replay
-* Observability
+Planned improvements include:
 
-Architecture:
-
-```text
-Service
-   |
-Outbox
-   |
-Debezium
-   |
-Kafka
-   |
-Consumers
-```
-
-The interesting part is not Kafka itself.
-
-It is watching how a simple database transaction gradually becomes part of a larger event-driven system.
+- Debezium Outbox Connector
+- Kafka Topics
+- Kafka Consumer Services
+- Retry and Backoff Strategies
+- Dead Letter Queue (DLQ)
+- Event Replay
+- Docker Compose Environment
+- Monitoring and Observability
 
 ---
 
-## Running the project
+# Running the Project
 
 Clone the repository:
 
@@ -309,9 +292,13 @@ Clone the repository:
 git clone https://github.com/mwapevi/springboot-outbox-pattern_debezium_kafka.git
 ```
 
-Start MySQL.
+Navigate to the project directory:
 
-Configure application properties.
+```bash
+cd springboot-outbox-pattern_debezium_kafka
+```
+
+Configure your MySQL database in `application.properties`.
 
 Run the application:
 
@@ -319,36 +306,30 @@ Run the application:
 mvn spring-boot:run
 ```
 
-Create a customer.
+Test the API:
 
-Inspect the database.
+```
+POST /api/v1/customer
+```
 
-Look at the Outbox table.
-
-That table is really the heart of the project.
-
-Everything else grows outward from there.
+Verify that both the `customer` and `outbox_event` tables contain the expected records.
 
 ---
 
-## Closing thought
+# Learning Outcomes
 
-Most software discussions eventually drift toward scale.
+This project has helped me gain practical experience with:
 
-More traffic.
+- Designing RESTful APIs
+- Spring Boot application development
+- Transaction management
+- The Transactional Outbox Pattern
+- Reliable event publishing
+- Preparing applications for Change Data Capture (CDC)
+- Building event-driven architectures incrementally
 
-More services.
+---
 
-More infrastructure.
+# License
 
-Reliability is often less dramatic.
-
-It begins with a quieter question.
-
-What happens when something fails halfway through?
-
-The Transactional Outbox Pattern is one answer to that question.
-
-Not the only answer.
-
-But in my experience, it is one of the most practical.
+This project is provided for learning and demonstration purposes.
