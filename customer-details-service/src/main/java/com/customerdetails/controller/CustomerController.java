@@ -15,8 +15,6 @@ public class CustomerController {
 
     private final CustomerService customerService;
 
-
-
     @PostMapping("/customer")
     public ResponseEntity<CustomerResponseDto> addNewCustomer(
             @RequestBody CustomerRequestDto customerRequestDto) {
@@ -27,4 +25,5 @@ public class CustomerController {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(customerResponseDto);
     }
+
 }
