@@ -23,11 +23,6 @@ sequenceDiagram
     CustomerService->>MySQL: Insert Customer
     MySQL-->>CustomerService: Commit Successful
 ```
-    Note over CustomerService: Application crashes
-
-    CustomerService-xKafka: Publish Event
-
-    Note over Kafka: Event never received
 
 1. A customer is successfully saved to the database.
 2. An event should be published to notify other services.
@@ -73,7 +68,7 @@ The primary goals of this project are to:
 
 Current Architecture
 
-```
+```mermaid
        flowchart TD
     A[REST API] --> B[Customer Service]
     B --> C
@@ -87,7 +82,7 @@ Current Architecture
 
 Future Architecture
 
-```
+```mermaid
               flowchart TD
     A[REST API] --> B[Customer Service]
     B --> C
@@ -123,16 +118,18 @@ Future Architecture
 
 # Repository Roadmap
 
+```mermaid
 flowchart LR
-A[Spring Boot Setup ✅]
-B[REST API ✅]
-C[Transactional Outbox ✅]
-D[Debezium CDC 🚧]
-E[Apache Kafka ⏳]
-F[Consumer Services ⏳]
-G[Production Ready]
+    A[Spring Boot Setup ✅]
+    B[REST API ✅]
+    C[Transactional Outbox ✅]
+    D[Debezium CDC 🚧]
+    E[Apache Kafka ⏳]
+    F[Consumer Services ⏳]
+    G[Production Ready]
 
     A --> B --> C --> D --> E --> F --> G
+```
 ---
 
 # Current Implementation
@@ -154,7 +151,7 @@ POST /api/v1/customer
 
 During a single transaction the application performs:
 
-```
+```mermaid
 flowchart TD
     A[Create Customer]
     B[Create Outbox Event]
@@ -173,10 +170,11 @@ If the transaction fails, neither record is persisted, ensuring the database rem
 
 The following sequence illustrates how the application guarantees reliable event creation.
 
+```mermaid
 sequenceDiagram
-participant Client
-participant CustomerService
-participant MySQL
+    participant Client
+    participant CustomerService
+    participant MySQL
 
     Client->>CustomerService: POST /api/v1/customer
 
@@ -188,6 +186,7 @@ participant MySQL
     MySQL-->>CustomerService: Transaction Committed
 
     CustomerService-->>Client: HTTP 201 Created
+```
 ---
 
 # Verification
@@ -226,7 +225,8 @@ Rather than polling the Outbox table, Debezium monitors the MySQL binary log and
 
 The expected event flow will become:
 
-```
+```mermaid
+
 flowchart TD
     A[Customer API]
     B[MySQL Transaction]
@@ -251,16 +251,18 @@ This removes the need for scheduled polling and enables near real-time event str
 ---
 # End-to-End Event Flow (Target Architecture)
 
+```mermaid
+
 flowchart LR
-A[REST API]
-B[Customer Service]
-C[(Customer Table)]
-D[(Outbox Table)]
-E[(MySQL Binlog)]
-F[Debezium]
-G[(Kafka Topic)]
-H[Notification Service]
-I[Analytics Service]
+    A[REST API]
+    B[Customer Service]
+    C[(Customer Table)]
+    D[(Outbox Table)]
+    E[(MySQL Binlog)]
+    F[Debezium]
+    G[(Kafka Topic)]
+    H[Notification Service]
+    I[Analytics Service]
 
     A --> B
     B --> C
@@ -270,6 +272,7 @@ I[Analytics Service]
     F --> G
     G --> H
     G --> I
+```
 ---
 
 Planned improvements include:
