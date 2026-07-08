@@ -9,32 +9,28 @@ import com.customerdetails.repository.CustomerRepo;
 import com.customerdetails.repository.OutboxRepo;
 import com.customerdetails.constants.OutBoxStatus;
 import com.customerdetails.util.JsonUtil;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 
-
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class CustomerService {
+
     private final CustomerRepo customerRepo;
     private final CustomerMapper mapper;
     private final OutboxRepo outboxRepo;
 
     @Transactional
-    public CustomerResponseDto addCustomer(CustomerRequestDto customerRequestDto){
-        Customer customer=mapper.toEntity(customerRequestDto);
-            customer.setCustomerId(customer.getCustomerId());
-            customer.setFirstName(customer.getFirstName());
-            customer.setLastName(customer.getLastName());
-            customer.setEmailAddress(customer.getEmailAddress());
-            customer.setPhysicalAddress(customer.getPhysicalAddress());
+    public CustomerResponseDto addCustomer(CustomerRequestDto customerRequestDto) {
 
-         Customer savedCustomer=customerRepo.save(customer);
+        Customer customer = mapper.toEntity(customerRequestDto);
 
-        CustomerOutbox outbox=new CustomerOutbox();
+        Customer savedCustomer = customerRepo.save(customer);
+
+        CustomerOutbox outbox = new CustomerOutbox();
         outbox.setPayload(JsonUtil.toJson(savedCustomer));
         outbox.setAggregateType("Customer");
         outbox.setEventType("Customer Registration");
@@ -45,6 +41,5 @@ public class CustomerService {
         outboxRepo.save(outbox);
 
         return mapper.toDto(savedCustomer);
-
     }
 }
