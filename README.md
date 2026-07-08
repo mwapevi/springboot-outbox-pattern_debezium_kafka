@@ -12,16 +12,17 @@ In reality, these are two separate actions that can fail independently.
 
 Consider a customer registration service:
 
+```mermaid
 sequenceDiagram
-participant Client
-participant CustomerService
-participant MySQL
-participant Kafka
+    participant Client
+    participant CustomerService
+    participant MySQL
+    participant Kafka
 
     Client->>CustomerService: Create Customer
     CustomerService->>MySQL: Insert Customer
     MySQL-->>CustomerService: Commit Successful
-
+```
     Note over CustomerService: Application crashes
 
     CustomerService-xKafka: Publish Event
