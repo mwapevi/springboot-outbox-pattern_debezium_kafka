@@ -122,7 +122,7 @@ Content-Type: application/json
 **Successful Response**
 
 ```http
-HTTP 201 Created
+![HTTP 201](https://img.shields.io/badge/HTTP-201_Created-success)
 ```
 ```JSON
 
