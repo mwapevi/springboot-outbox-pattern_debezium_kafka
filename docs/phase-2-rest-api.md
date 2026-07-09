@@ -87,7 +87,7 @@ processedAt
 
 ```mermaid
 flowchart TD
-    A[Client] --> B["POST /api/v1/addCustomer"]
+    A[Client] --> B["POST /api/v1/customer"]
     B --> C[CustomerController]
     C --> D[CustomerService]
 
