@@ -6,31 +6,31 @@ In this phase, we create the Spring Boot project, configure the required depende
 
 The following is a list of software required to implement this project.
 
-Java 21
-Maven 3.9+
-Docker Desktop
-MySQL 8
-Git
-IntelliJ IDEA
+- **Java 21**
+- **Maven 3.9+**
+- **MySQL 8**
+- **Git**
+- **IntelliJ IDEA**
+- **Docker Desktop**
 
 # 3 Create the Project
 
 This project was built using the following technologies:
 
-Spring Boot: 3.5.4
-Java: 21
-Maven: 3.9
-Packaging: JAR
+- **Spring Boot: 3.5.4**
+- **Java: 21**
+- **Maven: 3.9**
+- **Packaging: JAR**
 
 Dependencies:
 
-Spring Web
-Spring Data JPA
-MySQL Driver
-Lombok
-Validation
-Jackson
-Mapstruct
+- **Spring Web**
+- **Spring Data JPA**
+- **MySQL Driver**
+- **Lombok**
+- **Validation**
+- **Jackson**
+- **Mapstruct**
 
 # 4 Project Structure
 
@@ -103,11 +103,11 @@ Run the application (mvn spring-boot:run) and confirm that the application start
 
 # 9 Verify the REST Endpoint
 
-Test:
+**Test:**
 
 GET http://localhost:6666/api/health
 
-Response: 
+**Response:** 
 
 Application is running
 
