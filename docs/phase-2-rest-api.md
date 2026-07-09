@@ -1,6 +1,6 @@
 # 1 Overview
 
-In this phase, the application exposes a REST API that allows clients to Customers.
+In this phase, the application exposes a REST API that allows clients to Customers Service.
 
 The API receives an HTTP request, validates the incoming data, maps it to a domain entity, and persists it in MySQL using Spring Data JPA.
 
