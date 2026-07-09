@@ -7,18 +7,18 @@ The API receives an HTTP request, validates the incoming data, maps it to a doma
 At this stage, the application focuses solely on persisting data. Event publishing is introduced in the following phases.
 
 # 2 Objectives
-- **Build a REST endpoint for creating Customers.**
-- **Introduce the Customer Service layer.**
-- **Persist data using Spring Data JPA.**
-- **Separate responsibilities between controller, service, and repository.**
+- Build a REST endpoint for creating Customers.
+- Introduce the Customer Service layer.
+- Persist data using Spring Data JPA.
+- Separate responsibilities between controller, service, and repository.
 
 # 3 Components Created
 
-- **CustomerController**
+**CustomerController**
 
 Responsible for handling incoming HTTP requests.
 
-- **Example endpoint:**
+Example endpoint:
 ```properties
 http://localhost:6666/api/v1/customer
 ```
@@ -46,7 +46,7 @@ Spring Data JPA repository responsible for database access.
 public interface CustomerRepo extends JpaRepository<Customer, UUID> {
 }
 ```
-- **OutboxRepo**
+**OutboxRepo**
 
 Spring Data JPA repository responsible for database access.
 
@@ -56,7 +56,7 @@ public interface OutboxRepo extends JpaRepository<CustomerOutbox, UUID> {
 }
 ```
 
-- **Customer Entity**
+**Customer Entity**
 
 Represents the Customers table.
 
@@ -69,7 +69,7 @@ lastName
 emailAddress
 physicalAddress
 
-- **Customer Outbox Entity**
+**Customer Outbox Entity**
 
 Represents the CustomerOutbox table.
 
@@ -83,11 +83,10 @@ status
 createdAt
 processedAt
 
-- **API Request Flow**
+**API Request Flow**
 ```mermaid
 flowchart TD
-   flowchart TD
-    A[Client] --> B["POST /api/v1/customer"]
+    A[Client] --> B["POST /api/v1/addCustomer"]
     B --> C[CustomerController]
     C --> D[CustomerService]
 
@@ -103,11 +102,12 @@ flowchart TD
 
 The endpoint can be tested using Postman.
 
-- **Request**
+**Request**
+```post
 POST http://localhost:6666/api/v1/customer
 
 Content-Type: application/json
-
+```
 ```JSON
 {
 "customerId":"0011",
@@ -117,7 +117,7 @@ Content-Type: application/json
 "physicalAddress":"267 Outlook Terrace, Blackheath, Joahnesburg"
 }
 ```
-- **Successful Response**
+**Successful Response**
 
 ```http
 HTTP 201 Created
