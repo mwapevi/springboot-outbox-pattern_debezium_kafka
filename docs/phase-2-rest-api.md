@@ -28,7 +28,7 @@ Responsibilities:
 - Delegate business logic to the CustomerService layer
 - Return appropriate HTTP responses, i.e. 201
 
-- **CustomerService**
+**CustomerService**
 
 Contains the application's business logic.
 
@@ -38,7 +38,7 @@ Responsibilities:
 - Create a Customer entity
 - Save the entity using the repository
 
-- **CustomerRepo**
+**CustomerRepo**
 
 Spring Data JPA repository responsible for database access.
 ```properties
@@ -84,20 +84,22 @@ createdAt
 processedAt
 
 **API Request Flow**
+
 ```mermaid
 flowchart TD
     A[Client] --> B["POST /api/v1/addCustomer"]
     B --> C[CustomerController]
     C --> D[CustomerService]
 
-    subgraph Transaction["@Transactional"]
+    subgraph "@Transactional"
         D --> E[CustomerRepository]
         D --> G[OutboxRepository]
     end
 
     E --> F[(MySQL Database)]
     G --> F
- ```
+```
+
 # 4 Testing the API
 
 The endpoint can be tested using Postman.
