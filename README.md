@@ -1,4 +1,4 @@
-~~# MySQL CDC with the Transactional Outbox Pattern
+# MySQL CDC with the Transactional Outbox Pattern
 
 > A hands-on project demonstrating reliable event publishing using the Transactional Outbox Pattern, with incremental integration of Debezium-Change Data Capture (CDC), and Apache Kafka.
 
@@ -6,8 +6,8 @@
 ## Table of Contents
 
 - [Project Overview](#project-overview)
-- [Architecture](docs/system_architecture/End-to-End_Event_Flow_Architecture.md)
-- Implementation Roadmap
+- [System Architecture](docs/system_architecture/End-to-End_Event_Flow_Architecture.md)
+- # Implementation Roadmap
     - [Phase 1 – Project Setup](docs/phase-1-project-setup.md)
     - [Phase 2 – REST API](docs/phase-2-rest-api.md)
 ---
