@@ -23,20 +23,26 @@ public class CustomerOutbox {
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id")
     private UUID id;
+
     @Column(name = "aggregate_id", nullable = false)
     private UUID aggregateId;
+
     @Column(name = "aggregate_type", nullable = false)
     private String aggregateType;
+
     @Column(name = "event_type", nullable = false)
     private String eventType;
     @Lob
     @Column(name = "payload", nullable = false)
     private String payload;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private OutBoxStatus status;
+
     @Column(name = "created_at")
     private LocalDateTime createdAt;
+    
     @Column(name = "processed_at")
     private LocalDateTime processedAt;
 }
