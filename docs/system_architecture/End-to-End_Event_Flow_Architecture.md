@@ -1,8 +1,7 @@
 
 ## Architecture Overview
 
-```Mermaid
-
+```mermaid
 flowchart LR
     A[REST API]
     B[Customer Service]
