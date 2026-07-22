@@ -66,5 +66,6 @@ A client sends a request:
 ```
 The API receives the request and forwards it to the Customer Service.
 
+
 ← [Back to README](../README.md)
 
