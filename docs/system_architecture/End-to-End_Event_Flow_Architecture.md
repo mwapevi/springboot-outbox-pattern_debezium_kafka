@@ -1,3 +1,4 @@
+← [Back to README](../README.md)
 
 ## Architecture Overview
 
@@ -29,13 +30,12 @@ The architecture follows this event flow:
 Client Request → Customer Service → Database Transaction → Outbox Event → MySQL Binlog → Debezium CDC → Kafka → Multiple Consumers
 
 ## 1. REST API
- # Component:
+ ### Component:
 
 ```component
-A[REST API]
+ REST API
 ```
-
- # Responsibility:
+ ### Responsibility:
 
 The REST API is the entry point where external clients communicate with the system.
 
@@ -65,4 +65,6 @@ A client sends a request:
 
 ```
 The API receives the request and forwards it to the Customer Service.
+
+← [Back to README](../README.md)
 

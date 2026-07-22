@@ -6,7 +6,7 @@
 ## Table of Contents
 
 - [Project Overview](#project-overview)
-- [System Architecture](docs/system_architecture/End-to-End_Event_Flow_Architecture.md)
+- [Architecture Overview](docs/system_architecture/End-to-End_Event_Flow_Architecture.md)
 ## Implementation Roadmap
 
 - [Phase 1 – Project Setup](docs/phase-1-project-setup.md)
