@@ -29,7 +29,7 @@ flowchart LR
 
 The architecture follows this event flow:
 
-####Client Request → Customer Service → Database Transaction → Outbox Event → MySQL Binlog → Debezium CDC → Kafka → Multiple Consumers
+#### Client Request → Customer Service → Database Transaction → Outbox Event → MySQL Binlog → Debezium CDC → Kafka → Multiple Consumers
 
 
 ## REST API Request
