@@ -5,8 +5,23 @@
 ---
 ## Table of Contents
 
+
 - [Project Overview](#project-overview)
-- [Architecture Overview](docs/system_architecture/End-to-End_Event_Flow_Architecture.md)
+- [Objectives](#objectives)
+- [Technology Stack](#technology-stack)
+- [High-Level Project Architecture](#project-architecture)
+- [Low-Level Project Architecture](docs/system_architecture/End-to-End_Event_Flow_Architecture.md)
+- [Project Progress](#project-progress)
+- [Repository Roadmap](#repository-roadmap)
+- [Current Implementation](#current-implementation)
+- [Transactional Outbox Flow](#transactional-outbox-flow)
+- [Verification](#verification)
+- [Why the Outbox Pattern](#why-the-outbox-pattern)
+- [Debezium-CDC Integration](#next-phase-debezium-cdc)
+- [Target Architecture](#end-to-end-event-flow-target-architecture)
+- [Project Deployment](#running-the-project)
+- [Learning Outcomes](#learning-outcomes)
+
 ## Implementation Roadmap
 
 - [Phase 1 – Project Setup](docs/phase-1-project-setup.md)
