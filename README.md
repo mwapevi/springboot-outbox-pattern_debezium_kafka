@@ -8,8 +8,9 @@
 - [Project Overview](#project-overview)
 - [System Architecture](docs/system_architecture/End-to-End_Event_Flow_Architecture.md)
 ## Implementation Roadmap
-    - [Phase 1 – Project Setup](docs/phase-1-project-setup.md)
-    - [Phase 2 – REST API](docs/phase-2-rest-api.md)
+
+- [Phase 1 – Project Setup](docs/phase-1-project-setup.md)
+- [Phase 2 – REST API](docs/phase-2-rest-api.md)
 ---
 ## Project Overview
 
