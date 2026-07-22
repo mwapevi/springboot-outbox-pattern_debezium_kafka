@@ -7,11 +7,11 @@
 
 - [Project Overview](#project-overview)
 - [System Architecture](docs/system_architecture/End-to-End_Event_Flow_Architecture.md)
-- # Implementation Roadmap
+## Implementation Roadmap
     - [Phase 1 – Project Setup](docs/phase-1-project-setup.md)
     - [Phase 2 – REST API](docs/phase-2-rest-api.md)
 ---
-# Project Overview
+## Project Overview
 
 Modern distributed systems often rely on events to keep multiple services synchronized. A common mistake is assuming that saving data to a database and publishing an event are a single operation.
 
@@ -45,7 +45,7 @@ Rather than building everything at once, the project is intentionally developed 
 
 ---
 
-# Objectives
+## Objectives
 
 The primary goals of this project are to:
 
@@ -58,7 +58,7 @@ The primary goals of this project are to:
 
 ---
 
-# Technology Stack
+## Technology Stack
 
 - Java 21
 - Spring Boot
@@ -71,7 +71,7 @@ The primary goals of this project are to:
 
 ---
 
-# Project Architecture
+## Project Architecture
 
 Current Architecture
 
@@ -110,7 +110,7 @@ Future Architecture
 
 ---
 
-# Project Progress
+## Project Progress
 
 | Phase | Description | Status |
 |--------|-------------|--------|
@@ -123,7 +123,7 @@ Future Architecture
 
 ---
 
-# Repository Roadmap
+## Repository Roadmap
 
 ```mermaid
 flowchart LR
@@ -139,7 +139,7 @@ flowchart LR
 ```
 ---
 
-# Current Implementation
+## Current Implementation
 
 The application currently supports:
 
@@ -173,7 +173,7 @@ Both records are committed together.
 If the transaction fails, neither record is persisted, ensuring the database remains consistent.
 
 ---
-# Transactional Outbox Flow
+## Transactional Outbox Flow
 
 The following sequence illustrates how the application guarantees reliable event creation.
 
@@ -196,7 +196,7 @@ sequenceDiagram
 ```
 ---
 
-# Verification
+## Verification
 
 The current implementation has been verified by confirming that:
 
@@ -209,7 +209,7 @@ Artifacts demonstrating these results are available under the `docs` directory.
 
 ---
 
-# Why the Outbox Pattern?
+## Why the Outbox Pattern?
 
 Instead of attempting to update the database and publish an event simultaneously, the Transactional Outbox Pattern stores the event alongside the business data inside the same database transaction.
 
@@ -224,7 +224,7 @@ This approach removes the risk associated with dual writes while providing a rel
 
 ---
 
-# Next Phase: Debezium CDC
+## Next Phase: Debezium CDC
 
 The next milestone is integrating **Debezium**.
 
@@ -253,10 +253,10 @@ This removes the need for scheduled polling and enables near real-time event str
 
 ---
 
-# Future Enhancements
+## Future Enhancements
 
 ---
-# End-to-End Event Flow (Target Architecture)
+### End-to-End Event Flow (Target Architecture)
 
 ```mermaid
 
@@ -295,7 +295,7 @@ Planned improvements include:
 
 ---
 
-# Running the Project
+## Running the Project
 
 Clone the repository:
 
@@ -327,7 +327,7 @@ Verify that both the `customer` and `outbox_event` tables contain the expected r
 
 ---
 
-# Learning Outcomes
+## Learning Outcomes
 
 This project has helped me gain practical experience with:
 
@@ -341,6 +341,6 @@ This project has helped me gain practical experience with:
 
 ---
 
-# License
+## License
 
 This project is provided for learning and demonstration purposes.
