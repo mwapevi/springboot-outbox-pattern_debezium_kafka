@@ -91,7 +91,7 @@ Once an API request reaches the Customer Service component, it performs the foll
 
 ## MySQL Binlog
 
-MySQL records the insert into the Outbox table in its binary log (binlog).
+MySQL records the Outbox table insert event in its binary log (binlog).
 
 ## Debezium
 
