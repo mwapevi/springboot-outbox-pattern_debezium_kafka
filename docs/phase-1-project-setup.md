@@ -1,3 +1,5 @@
+← [Back to README](/README.md)
+
 ## Project Overview
 
 In this phase, we create the Spring Boot project, configure the required dependencies, connect to MySQL, and verify that the application starts successfully. This establishes the foundation for the remaining phases of the project.
@@ -150,6 +152,6 @@ At the end of this phase we have:
 
 With this project foundation complete, the next phase focuses on implementing the Customer REST API.
 
-
+← [Back to README](/README.md)
 
 
