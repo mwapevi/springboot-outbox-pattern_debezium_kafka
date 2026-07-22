@@ -134,11 +134,7 @@ The following screenshots demonstrate the successful completion of Phase 1 setup
 ![Application Startup](artifacts/phase-1/application-startup-logs.png)
 
 ### Database Connection
-![DB Connectivity](/docs/artifacts/phase-1/app-db-connection.png)
-
-### Database Tables
-![Customer Details DB](artifacts/phase-1/customer-db.png)
-![Customer Outbox DB](artifacts/phase-1/customer-outbox-db.png)
+![DB Connectivity](artifacts/phase-1/app-db-connection.png)
 
 ## What We achieved
 
