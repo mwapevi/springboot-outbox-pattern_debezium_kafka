@@ -84,10 +84,10 @@ The API receives the request and forwards it to the Customer Service.
 
 Once an API request reaches the Customer Service component, it performs the following actions:
 
-Starts a database transaction.
-Updates the Customer table.
-Writes an event (such as "CustomerCreated") to the Outbox table.
-Commits both operations within the same transaction, ensuring data consistency.
+- Starts a database transaction.
+- Updates the Customer table.
+- Writes an event (such as "CustomerCreated") to the Outbox table.
+- Commits both operations within the same transaction, ensuring data consistency.
 
 ## MySQL Binlog
 
