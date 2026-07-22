@@ -128,17 +128,17 @@ Application is running
 The following screenshots demonstrate the successful completion of Phase 1 setup.
 
 ### Open Project in IntelliJ
-![Project opened in IntelliJ](artifacts/phase-1/CustomerDetails_Project.PNG)
+![Project opened in IntelliJ](artifacts/phase-1/customer-project.png)
 
 ### Application Startup
-![Application Startup](artifacts/phase-1/Application_startup_logs.PNG)
+![Application Startup](artifacts/phase-1/application-startup-logs.png)
 
 ### Database Connection
-![App_DB-Conn](artifacts/phase-1/app-db-conn.PNG)
+![App_DB-Conn](artifacts/phase-1/app-db-connection.png)
 
 ### Database Tables
-![Customer Details DB](artifacts/phase-1/Customer_DB.PNG)
-![Customer Outbox DB](artifacts/phase-1/Customer_Outbox_DB.PNG)
+![Customer Details DB](artifacts/phase-1/customer-db.png)
+![Customer Outbox DB](artifacts/phase-1/customer-outbox-db.png)
 
 ## What We achieved
 
