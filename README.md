@@ -23,6 +23,7 @@
 - [Learning Outcomes](#learning-outcomes)
 
 ---
+[↑ Back to Top](#table-of-Contents)
 ## Project Overview
 
 Modern distributed systems often rely on events to keep multiple services synchronized. A common mistake is assuming that saving data to a database and publishing an event are a single operation.
@@ -56,7 +57,7 @@ This repository explores one of the most widely adopted solutions to this challe
 Rather than building everything at once, the project is intentionally developed in phases, allowing each concept to be implemented, verified, and documented independently.
 
 ---
-
+[↑ Back to Top](#table-of-Contents)
 ## Objectives
 
 The primary goals of this project are to:
@@ -69,7 +70,7 @@ The primary goals of this project are to:
 - Build an end-to-end event-driven workflow using modern technologies
 
 ---
-
+[↑ Back to Top](#table-of-Contents)
 ## Technology Stack
 
 - Java 21
@@ -82,10 +83,10 @@ The primary goals of this project are to:
 - Docker *(Planned)*
 
 ---
-
+[↑ Back to Top](#table-of-Contents)
 ## High-Level Project Architecture
 
-Current Architecture
+**Current Architecture**
 
 ```mermaid
        flowchart TD
@@ -99,7 +100,7 @@ Current Architecture
     end
 ```
 
-Future Architecture
+**Future Architecture**
 
 ```mermaid
               flowchart TD
@@ -120,12 +121,14 @@ Future Architecture
     H --> J[Analytics Service]
 ```
 ---
+[↑ Back to Top](#table-of-Contents)
 ## Low-Level Project Architecture
 
 The following hyperlink provides detailed information about the system architecture.
 
 ### [Low-Level Project Architecture](docs/system_architecture/End-to-End_Event_Flow_Architecture.md)
 ---
+[↑ Back to Top](#table-of-Contents)
 ## Project Roadmap
 
 - [Phase 1 – Project Setup](docs/phase-1-project-setup.md)
@@ -144,7 +147,7 @@ The following hyperlink provides detailed information about the system architect
 | Phase 6 | Consumer Services | ⏳ Planned |
 
 ---
-
+[↑ Back to Top](#table-of-Contents)
 ## Repository Roadmap
 
 ```mermaid
@@ -160,7 +163,7 @@ flowchart LR
     A --> B --> C --> D --> E --> F --> G
 ```
 ---
-
+[↑ Back to Top](#table-of-Contents)
 ## Current Implementation
 
 The application currently supports:
@@ -195,6 +198,7 @@ Both records are committed together.
 If the transaction fails, neither record is persisted, ensuring the database remains consistent.
 
 ---
+[↑ Back to Top](#table-of-Contents)
 ## Transactional Outbox Flow
 
 The following sequence illustrates how the application guarantees reliable event creation.
@@ -217,7 +221,7 @@ sequenceDiagram
     CustomerService-->>Client: HTTP 201 Created
 ```
 ---
-
+[↑ Back to Top](#table-of-Contents)
 ## Verification
 
 The current implementation has been verified by confirming that:
@@ -230,7 +234,7 @@ The current implementation has been verified by confirming that:
 Artifacts demonstrating these results are available under the `docs` directory.
 
 ---
-
+[↑ Back to Top](#table-of-Contents)
 ## Why the Outbox Pattern?
 
 Instead of attempting to update the database and publish an event simultaneously, the Transactional Outbox Pattern stores the event alongside the business data inside the same database transaction.
@@ -245,7 +249,7 @@ This guarantees that:
 This approach removes the risk associated with dual writes while providing a reliable foundation for event-driven systems.
 
 ---
-
+[↑ Back to Top](#table-of-Contents)
 ## Next Phase: Debezium CDC
 
 The next milestone is integrating **Debezium**.
@@ -274,10 +278,11 @@ flowchart TD
 This removes the need for scheduled polling and enables near real-time event streaming.
 
 ---
-
+[↑ Back to Top](#table-of-Contents)
 ## Future Enhancements
 
 ---
+[↑ Back to Top](#table-of-Contents)
 ### End-to-End Event Flow (Target Architecture)
 
 ```mermaid
@@ -303,7 +308,7 @@ flowchart LR
     G --> I
 ```
 ---
-
+[↑ Back to Top](#table-of-Contents)
 Planned improvements include:
 
 - Debezium Outbox Connector
@@ -316,7 +321,7 @@ Planned improvements include:
 - Monitoring and Observability
 
 ---
-
+[↑ Back to Top](#table-of-Contents)
 ## Running the Project
 
 Clone the repository:
@@ -348,7 +353,7 @@ POST /api/v1/customer
 Verify that both the `customer` and `outbox_event` tables contain the expected records.
 
 ---
-
+[↑ Back to Top](#table-of-Contents)
 ## Learning Outcomes
 
 This project has helped me gain practical experience with:
@@ -362,7 +367,7 @@ This project has helped me gain practical experience with:
 - Building event-driven architectures incrementally
 
 ---
-
+[↑ Back to Top](#table-of-Contents)
 ## License
 
 This project is provided for learning and demonstration purposes.
