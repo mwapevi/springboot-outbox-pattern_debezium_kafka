@@ -11,6 +11,7 @@
 - [Technology Stack](#technology-stack)
 - [High-Level Project Architecture](#project-architecture)
 - [Low-Level Project Architecture](docs/system_architecture/End-to-End_Event_Flow_Architecture.md)
+- [Project Roadmap](#project-roadmap)
 - [Project Progress](#project-progress)
 - [Repository Roadmap](#repository-roadmap)
 - [Current Implementation](#current-implementation)
@@ -22,10 +23,6 @@
 - [Project Deployment](#running-the-project)
 - [Learning Outcomes](#learning-outcomes)
 
-## Implementation Roadmap
-
-- [Phase 1 – Project Setup](docs/phase-1-project-setup.md)
-- [Phase 2 – REST API](docs/phase-2-rest-api.md)
 ---
 ## Project Overview
 
@@ -125,7 +122,12 @@ Future Architecture
 ```
 
 ---
+## Project Roadmap
 
+- [Phase 1 – Project Setup](docs/phase-1-project-setup.md)
+- [Phase 2 – REST API](docs/phase-2-rest-api.md)
+
+---
 ## Project Progress
 
 | Phase | Description | Status |
