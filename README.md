@@ -124,7 +124,7 @@ Future Architecture
 
 The following hyperlink provides detailed information about the system architecture.
 
-[Low-Level Project Architecture](docs/system_architecture/End-to-End_Event_Flow_Architecture.md)
+### [Low-Level Project Architecture](docs/system_architecture/End-to-End_Event_Flow_Architecture.md)
 ---
 ## Project Roadmap
 
