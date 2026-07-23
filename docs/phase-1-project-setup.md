@@ -67,17 +67,17 @@ customer-details-service
 application.properties:
 
 - **Database Connection URL**
-  Define the connection URL that Spring Boot uses to connect the application to MySQL database.
+  Defines the connection URL that Spring Boot uses to connect the application to MySQL database.
  ```properties
 spring.datasource.url=jdbc:mysql://localhost:3306/mysqldb
  ```
 - **Database Username**
-Define the username Spring Boot will use to authenticate with MySQL database.
+Defines the username Spring Boot will use to authenticate with MySQL database.
  ```properties
 spring.datasource.username=mysqlusername
  ```
 - **Database Password**
-Define the password Spring Boot will use to connect to MySQL database.
+Defines the password Spring Boot will use to connect to MySQL database.
 ```properties
 spring.datasource.password=mysqlpassword
 ```
@@ -151,6 +151,74 @@ At the end of this phase we have:
 - Verified the application starts successfully.
 
 With this project foundation complete, the next phase focuses on implementing the Customer REST API.
+
+## Challenges Faced During Implementation
+
+Throughout the implementation, several technical issues were encountered that affected application startup, database connectivity, and schema management. The root causes were identified and appropriate solutions were applied to achieve a stable and fully functional system. The key challenges and their resolutions are described below.
+
+### 1. Missing MYSQL JDBC Driver
+
+### Challenge
+
+The application failed to start with a "Driver class not found" error because the MySQL JDBC driver was not included in the project dependencies as shown in the screenshot below.
+
+![MISSING_MYSQL_JDBC_DRIVER](artifacts/phase-1/missing-mysql-jdbc-driver.png)
+
+### Cause
+
+Spring Boot requires the MySQL Connector/J library to establish a connection with the MySQL database.
+
+### Solution
+
+Added the MySQL Connector/J dependency to the Maven project.
+
+```Dependencies
+<dependency>
+    <groupId>com.mysql</groupId>
+    <artifactId>mysql-connector-j</artifactId>
+</dependency>
+```
+### 2. Incorrect Hibernate Configuration
+
+### Challenge
+
+Incorrect Hibernate configuration resulted in database schema issues, including:
+
+- Existing tables and records being overwritten when using ddl-auto=create.
+
+![INCORRECT-HIB-CONFIG](artifacts/phase-1/incorrect_hib_configs.png)
+
+![RECORDS_OVERWRITTEN](artifacts/phase-1/overwritten-db-records.png)
+
+### Cause
+
+Hibernate's schema generation strategy (ddl-auto)  configuration were not aligned with the project requirements.
+
+### Solution
+
+Configured Hibernate with the appropriate settings with using ddl-auto=update for this environment.
+
+![DDL-AUTO-UPDATE](artifacts/phase-1/ddl_auto_update.png)
+
+### 3. Database Authentication Issues
+
+### Challenge
+
+The application was unable to authenticate with the MySQL database, resulting in:
+
+- "Access denied for user" errors.
+- Authentication plugin compatibility errors.
+
+![WRONG-DB-SETTINGS](artifacts/phase-1/wrong-db-settings.png)
+
+### Cause
+
+The MySQL server authentication plugin was incompatible with the configured user credentials.
+
+### Solution
+
+Verified the database credentials, ensured the correct DB Username and Password was configured.
+
 
 ← [Back to README](/README.md)
 
