@@ -5,11 +5,10 @@
 ---
 ## Table of Contents
 
-
 - [Project Overview](#project-overview)
 - [Objectives](#objectives)
 - [Technology Stack](#technology-stack)
-- [High-Level Project Architecture](#project-architecture)
+- [High-Level Project Architecture](#high-level-project-architecture)
 - [Low-Level Project Architecture](docs/system_architecture/End-to-End_Event_Flow_Architecture.md)
 - [Project Roadmap](#project-roadmap)
 - [Project Progress](#project-progress)
@@ -84,7 +83,7 @@ The primary goals of this project are to:
 
 ---
 
-## Project Architecture
+## High-Level Project Architecture
 
 Current Architecture
 
@@ -120,7 +119,12 @@ Future Architecture
     H --> I[Notification Service]
     H --> J[Analytics Service]
 ```
+---
+## Low-Level Project Architecture
 
+The following hyperlink provides detailed information about the system architecture.
+
+[Low-Level Project Architecture](docs/system_architecture/End-to-End_Event_Flow_Architecture.md)
 ---
 ## Project Roadmap
 
