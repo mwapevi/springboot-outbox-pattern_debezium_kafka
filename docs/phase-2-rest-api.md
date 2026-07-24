@@ -1,24 +1,26 @@
-# 1 Overview
+## Overview
 
-In this phase, the application exposes a REST API that allows clients to Customers Service.
+In this phase, the application exposes a REST API that allows clients to interact with Customers Service.
 
 The API receives an HTTP request, validates the incoming data, maps it to a domain entity, and persists it in MySQL using Spring Data JPA.
 
 At this stage, the application focuses solely on persisting data. Event publishing is introduced in the following phases.
 
-# 2 Objectives
+## Objectives
+---
 - Build a REST endpoint for creating Customers.
 - Introduce the Customer Service layer.
 - Persist data using Spring Data JPA.
 - Separate responsibilities between controller, service, and repository.
 
-# 3 Components Created
+## Components Created
 
 **CustomerController**
 
-Responsible for handling incoming HTTP requests.
+- The component responsible for handling incoming HTTP requests.
 
 Example endpoint:
+
 ```properties
 http://localhost:6666/api/v1/customer
 ```
@@ -30,7 +32,7 @@ Responsibilities:
 
 **CustomerService**
 
-Contains the application's business logic.
+- This component presents the application's business logic.
 
 Responsibilities:
 
@@ -40,7 +42,8 @@ Responsibilities:
 
 **CustomerRepo**
 
-Spring Data JPA repository responsible for database access.
+- This is a Spring Data JPA repository responsible for database access.
+
 ```properties
 @Repository
 public interface CustomerRepo extends JpaRepository<Customer, UUID> {
@@ -48,7 +51,7 @@ public interface CustomerRepo extends JpaRepository<Customer, UUID> {
 ```
 **OutboxRepo**
 
-Spring Data JPA repository responsible for database access.
+- This is a Spring Data JPA repository responsible for database access.
 
 ```properties
 @Repository
@@ -58,30 +61,30 @@ public interface OutboxRepo extends JpaRepository<CustomerOutbox, UUID> {
 
 **Customer Entity**
 
-Represents the Customers table.
+- This represents Customer details in a Customers Database table.
 
 Example fields:
 
-id
-customerId
-firstLame
-lastName
-emailAddress
-physicalAddress
+- id
+- customerId
+- firstLame
+- lastName
+- emailAddress
+- physicalAddress
 
 **Customer Outbox Entity**
 
-Represents the CustomerOutbox table.
+- This represents customer details in an CustomerOutbox database table.
 
 Example fields:
 
-Id
-aggregateType
-eventType
-payload
-status
-createdAt
-processedAt
+- Id
+- aggregateType
+- eventType
+- payload
+- status
+- createdAt
+- processedAt
 
 **API Request Flow**
 
@@ -100,15 +103,17 @@ flowchart TD
     G --> F
 ```
 
-# 4 Testing the API
+## API Testing
 
-The endpoint can be tested using Postman.
+The endpoint was tested in Postman as follows:
 
 **Request**
+
 ```post
-POST http://localhost:6666/api/v1/customer
 
 Content-Type: application/json
+
+POST http://localhost:6666/api/v1/customer
 ```
 ```JSON
 {
@@ -119,10 +124,12 @@ Content-Type: application/json
 "physicalAddress":"267 Outlook Terrace, Blackheath, Joahnesburg"
 }
 ```
-**Successful Response**
+**Response**
 
-✅ HTTP 201 Created
+```status
+Status: HTTP 201 Created
 
+```
 ```JSON
 
 {
@@ -133,9 +140,9 @@ Content-Type: application/json
     "physicalAddress": "267 Outlook Terrace, Blackheath, Joahnesburg"
 }
 ```
-# 5 Database Verification
+## Database Verification
 
-After a successful request, verify that the both Customers and CustomerOutbox have been persisted with the same transaction.
+Following a successful API testing, verification was performed to ensure that both Customers and CustomerOutbox were persisted in the same transaction.
 
 ```SQL
 
@@ -144,21 +151,34 @@ SELECT * FROM Customers;
 SELECT * FROM CustomerOutbox;
 
 ```
-You should see the newly created Customer record in both database tables.
+Newly created Customer records in both database tables where observed.
 
-# 6 Screenshots
+## Screenshots
 
-Please refer to the following image artifacts in docs/artifacts/phase-2/
+This section presents the artifacts captured during REST API testing, hence marking the completion of Phase-2 of the project implementation.
 
-Screenshots include:
+### API Status in Postman
 
-- **API Request simulation to the endpoint in Postman**
-- **Successful API response**
-- **Successful response in the logs**
-- **Customer record persisted in Customers Database Table**
-- **Customer record persisted in CustomerOutbox Database Table**
+![API Status](artifacts/phase-2/postman_calling_api_health.png)
 
-# 7 Summary
+### API Request/Response in Postman
+
+![Postman-Request](artifacts/phase-2/api-request.png)
+![Postman-Response](artifacts/phase-2/api-response.png)
+
+### API Logs
+
+![api-logs](artifacts/phase-2/success-logs.png)
+
+### Customer Record Persistence
+
+![customer-table](artifacts/phase-2/customer-records-db-table.png)
+
+### CustomerOutbox Record Persistence
+
+![outbox-table](artifacts/phase-2/customer-outbox-record-db-table.png)
+
+## Summary
 
 By the end of this phase, the application can receive HTTP requests and persist Customer records to the database using a layered Spring Boot architecture with the Transactional Outbox Pattern. This establishes the foundation for the next phase, where Debezium-Change Data Capture will be introduced to ensure that database changes and event publication remain reliable and consistent.
 
