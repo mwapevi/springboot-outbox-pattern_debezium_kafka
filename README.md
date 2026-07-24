@@ -1,5 +1,7 @@
 # MySQL CDC with the Transactional Outbox Pattern
 
+![License](https://img.shields.io/github.com/mwapevi/springboot-outbox-pattern_debezium_kafka)
+
 > A hands-on project demonstrating reliable event publishing using the Transactional Outbox Pattern, with incremental integration of Debezium-Change Data Capture (CDC), and Apache Kafka.
 
 ---
@@ -347,7 +349,8 @@ mvn spring-boot:run
 Test the API:
 
 ```
-POST /api/v1/customer
+POST http://localhost:6666/api/v1/customer
+
 ```
 
 Verify that both the `customer` and `outbox_event` tables contain the expected records.
@@ -367,7 +370,19 @@ This project has helped me gain practical experience with:
 - Building event-driven architectures incrementally
 
 ---
-[↑ Back to Top](#table-of-Contents)
-## License
+## Author
 
-This project is provided for learning and demonstration purposes.
+**Victor Mwape**
+
+GitHub: [mwapevi](https://github.com/mwapevi)
+
+Areas of Interest:
+- Backend Engineering
+- Fintech Infrastructure
+- Event-Driven Systems
+- API Integrations
+- Data Engineering
+---
+[↑ Back to Top](#table-of-Contents)
+
+
