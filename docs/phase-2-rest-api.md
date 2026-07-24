@@ -1,6 +1,8 @@
+← [Back to README](/README.md)
+
 ## Overview
 
-In this phase, the application exposes a REST API that allows clients to interact with Customers Service.
+In this phase, the application exposes a REST API endpoint that allows clients to interact with Customers Service.
 
 The API receives an HTTP request, validates the incoming data, maps it to a domain entity, and persists it in MySQL using Spring Data JPA.
 
@@ -182,3 +184,4 @@ This section presents the artifacts captured during REST API testing, hence mark
 
 By the end of this phase, the application can receive HTTP requests and persist Customer records to the database using a layered Spring Boot architecture with the Transactional Outbox Pattern. This establishes the foundation for the next phase, where Debezium-Change Data Capture will be introduced to ensure that database changes and event publication remain reliable and consistent.
 
+← [Back to README](/README.md)
