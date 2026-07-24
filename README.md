@@ -375,7 +375,7 @@ This project has helped me gain practical experience with:
 
 **Victor Mwape**
 
-GitHub: [mwapevi](https://github.com/mwapevi) **|** Medium: https://medium.com/@victormwape201
+**GitHub:** [mwapevi](https://github.com/mwapevi)  **|** **Medium:** https://medium.com/@victormwape2012
 
 Areas of Interest:
 - Backend Engineering
