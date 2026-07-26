@@ -184,4 +184,52 @@ This section presents the artifacts captured during REST API testing, hence mark
 
 By the end of this phase, the application can receive HTTP requests and persist Customer records to the database using a layered Spring Boot architecture with the Transactional Outbox Pattern. This establishes the foundation for the next phase, where Debezium-Change Data Capture will be introduced to ensure that database changes and event publication remain reliable and consistent.
 
+## Challenges Faced During Implementation
+
+During the implementation, several challenges were encountered while developing the REST API with Spring Boot, Spring Data JPA, and the Transactional Outbox Pattern. The following sections describe the issues encountered and the approaches taken to resolve them.
+
+
+### Ensuring Transactional Consistency
+
+### Challenge
+
+Ensuring that the application persists data to both Customers and CustomerOutbox tables as part of a single business operation was one of the main objectives of this project.However, a challenge arose in ensuring that the two database writes remain consistent if an unexpected error happened during the process.
+
+Without proper transaction management, a failure after the Customer record had been saved,and before the corresponding CustomerOutbox record was persisted could leave the database in an inconsistent state. This would result in a customer record existing without a matching outbox event, preventing downstream services from being notified of the change. 
+
+This following artifacts demonstrates the above challenge faced during implementation.
+
+### Outbox Write Failure-Logs
+![Outbox_write_failure](artifacts/phase-2/outbox_write_failure.png)
+
+### CustomerOutbox Database Write Failure 
+![empty_outbox](artifacts/phase-2/write_problem.png)
+
+
+### Why Ensuring Transactional Consistency
+
+The Transactional Outbox Pattern relies on the business entity and its corresponding outbox event being committed atomically. If only one record is committed:
+
+- The Customers table may contain data that downstream services never receive.
+- Event-driven workflows become unreliable because Debezium (introduced in the next phase) only publishes events that exist in the outbox table.
+- Recovering from this inconsistency typically requires manual intervention or custom reconciliation logic.
+
+### Resolution
+
+The CustomerService class was annotated with @Transactional, ensuring that the persistence of both the Customer and CustomerOutbox entities occurs within a single database transaction.
+
+![added_transactional_anno](artifacts/phase-2/added_transactional.png)
+
+As a result:
+
+- No exception occurs as Spring Boot processes the request successfully..
+
+![success logs](artifacts/phase-2/write_successful.png)
+
+- Both records are committed in Customers and CustomerOutbox successfully when processing completes without errors.
+
+![customer_write](artifacts/phase-2/customers_write.png)
+
+![customer_outbox_write](artifacts/phase-2/outbox_write.png)
+
 ← [Back to README](/README.md)
