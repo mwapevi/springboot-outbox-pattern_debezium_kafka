@@ -31,6 +31,7 @@ public class CustomerService {
         Customer savedCustomer = customerRepo.save(customer);
 
         CustomerOutbox outbox = new CustomerOutbox();
+        outbox.setAggregateId(savedCustomer.getId());
         outbox.setPayload(JsonUtil.toJson(savedCustomer));
         outbox.setAggregateType("Customer");
         outbox.setEventType("Customer Registration");
@@ -38,8 +39,9 @@ public class CustomerService {
         outbox.setCreatedAt(LocalDateTime.now());
         outbox.setProcessedAt(LocalDateTime.now());
 
-        outboxRepo.save(outbox);
+       outboxRepo.save(outbox);
 
-        return mapper.toDto(savedCustomer);
+       System.out.println("CustomerOutbox Write Successful.");
+       return mapper.toDto(savedCustomer);
     }
 }

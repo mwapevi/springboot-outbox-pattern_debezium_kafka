@@ -6,11 +6,13 @@ package com.customerdetails.dto;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.UUID;
+
 @Setter
 @Getter
 public class CustomerResponseDto {
 
-    private Long customerId;
+    private Long Id;
     private String firstName;
     private String lastName;
     private String emailAddress;

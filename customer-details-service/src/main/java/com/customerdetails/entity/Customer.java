@@ -3,7 +3,10 @@ package com.customerdetails.entity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;      // Generates getter methods for all fields
+import lombok.NoArgsConstructor;
 import lombok.Setter;      // Generates setter methods for all fields
+
+import java.util.UUID;
 
 /**
  * JPA entity representing a customer record.
@@ -13,7 +16,8 @@ import lombok.Setter;      // Generates setter methods for all fields
 @Table(name = "Customers")   // Maps this entity to the Customers database table
 @Getter                      // Lombok generates getter methods for all fields
 @Setter                      // Lombok generates setter methods for all fields
-@AllArgsConstructor          // Lombok generates a constructor with all fields as parameters
+@AllArgsConstructor
+@NoArgsConstructor// Lombok generates a constructor with all fields as parameters
 public class Customer {
 
     /**
@@ -22,7 +26,7 @@ public class Customer {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long customerId;
+    private Long Id;
 
     //Customer's first name.
     private String firstName;

@@ -22,14 +22,14 @@ public class CustomerOutbox {
     // Unique identifier for each outbox event.
     // Generated automatically as a UUID by Hibernate.
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private UUID id;
+    private Long id;
 
     // Identifier of the business entity (aggregate) that produced this event.
     // Example: the Customer ID.
     @Column(name = "aggregate_id", nullable = false)
-    private UUID aggregateId;
+    private Long aggregateId;
 
     // Type of aggregate that generated the event.
     // Example: "Customer", "Order", or "Payment".
