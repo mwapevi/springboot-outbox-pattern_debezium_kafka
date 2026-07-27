@@ -147,7 +147,7 @@ The following hyperlink provides detailed information about the system architect
 | Phase 2 | Customer REST API & Transactional Outbox Pattern |  Completed  |
 | Phase 3 | Debezium-CDC Integration                         | 🚧In Progress  |
 | Phase 4 | Apache Kafka Integration                         |  ⏳ Planned |
-| Phase 5 | Consumer Services                                | ⏳ Planned   |
+| Phase 5 | Kafka Consumer Services                          | ⏳ Planned   |
 
 
 ---
