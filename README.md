@@ -134,20 +134,21 @@ The following hyperlink provides detailed information about the system architect
 [↑ Back to Top](#table-of-Contents)
 ## Project Roadmap
 
-- [Phase 1 – Project Setup](docs/phase-1-project-setup.md)
-- [Phase 2 – REST API](docs/phase-2-rest-api.md)
+- [Phase 1 – Spring Boot Project Setup](docs/phase-1-project-setup.md)
+- [Phase 2 – REST API & Transactional Outbox Pattern](docs/phase-2-rest-api-outbox-pattern.md)
+- [Phase 3 – Debezium-CDC Integration](docs/phase-3-debezium-cdc-integration.md)
 
 ---
 ## Project Progress
 
-| Phase | Description | Status |
-|--------|-------------|--------|
-| Phase 1 | Spring Boot Project Setup | ✅ Completed |
-| Phase 2 | Customer REST API | ✅ Completed |
-| Phase 3 | Transactional Outbox Pattern | ✅ Completed |
-| Phase 4 | Debezium CDC Integration | 🚧 In Progress |
-| Phase 5 | Apache Kafka Integration | ⏳ Planned |
-| Phase 6 | Consumer Services | ⏳ Planned |
+| Phase   | Description                                      | Status      |
+|---------|--------------------------------------------------|-------------|
+| Phase 1 | Spring Boot Project Setup                        |  Completed  |
+| Phase 2 | Customer REST API & Transactional Outbox Pattern |  Completed  |
+| Phase 3 | Debezium-CDC Integration                         | 🚧In Progress  |
+| Phase 4 | Apache Kafka Integration                         |  ⏳ Planned |
+| Phase 5 | Consumer Services                                | ⏳ Planned   |
+
 
 ---
 [↑ Back to Top](#table-of-Contents)
