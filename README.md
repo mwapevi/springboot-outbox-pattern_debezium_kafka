@@ -141,13 +141,13 @@ The following hyperlink provides detailed information about the system architect
 ---
 ## Project Progress
 
-| Phase   | Description                                      | Status      |
-|---------|--------------------------------------------------|-------------|
-| Phase 1 | Spring Boot Project Setup                        |  Completed  |
+| Phase   | Description                                 | Status      |
+|---------|---------------------------------------------|-------------|
+| Phase 1 | Spring Boot Project Setup                   |  Completed  |
 | Phase 2 | Customer REST API & Transactional Outbox Pattern |  Completed  |
-| Phase 3 | Debezium-CDC Integration                         | 🚧In Progress  |
-| Phase 4 | Apache Kafka Integration                         |  ⏳ Planned |
-| Phase 5 | Kafka Consumer Services                          | ⏳ Planned   |
+| Phase 3 | Apache Kafka Integration                    | 🚧In Progress  |
+| Phase 4 | Debezium-CDC Integration                    |  ⏳ Planned |
+| Phase 5 | Kafka Consumer Services                     | ⏳ Planned   |
 
 
 ---
