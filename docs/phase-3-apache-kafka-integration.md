@@ -45,7 +45,10 @@ C:\
     
 ```
 
-![kafka-details](artifacts/phase-3/kafka_config_details.png)
+### The following is a sample screenshot of Apache Kafka was setup on localhost
+
+![Kafka Setup on Localhost](/docs/artifacts/phase-3/kafka-config-details.png)
+
 
 
 ← [Back to README](/README.md)
