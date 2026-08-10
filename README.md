@@ -136,7 +136,7 @@ The following hyperlink provides detailed information about the system architect
 
 - [Phase 1 – Spring Boot Project Setup](docs/phase-1-project-setup.md)
 - [Phase 2 – REST API & Transactional Outbox Pattern](docs/phase-2-rest-api-outbox-pattern.md)
-- [Phase 3 – REST API & Transactional Outbox Pattern](docs/phase-3-apache-kafka-integration.md)
+- [Phase 3 – Apacha Kafka Integration](docs/phase-3-apache-kafka-integration.md)
 
 ---
 ## Project Progress
