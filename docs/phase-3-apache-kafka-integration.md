@@ -89,7 +89,7 @@ server.properties
 **Running Zookeeper Screenshots**
 
 ![Zookeeper-start](/docs/artifacts/phase-3/zookeeper-start1.png)
-![Zookeeper-start2](/docs/artifacts/phase-3/zookeeper-start1.png)
+![Zookeeper-start2](/docs/artifacts/phase-3/zookeeper-start2.png)
 
 
 ← [Back to README](/README.md)
