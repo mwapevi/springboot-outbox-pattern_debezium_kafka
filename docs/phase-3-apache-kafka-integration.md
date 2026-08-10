@@ -81,12 +81,12 @@ server.properties
 
 - Navigate to Kafka folder
 - Run the command to start Zookeeper
--Keep the terminal open
+- Keep the terminal open
 ```command
   cd C:\kafka\kafka_2.12-3.2.0
   bin\windows\zookeeper-server-start.bat config\zookeeper.properties
 ```
-**Running Zookeeper Screenshots**
+**Screenshots of Running Zookeeper**
 
 ![Zookeeper-start](/docs/artifacts/phase-3/zookeeper-start1.png)
 ![Zookeeper-start2](/docs/artifacts/phase-3/zookeeper-start2.png)
