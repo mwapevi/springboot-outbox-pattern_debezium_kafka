@@ -45,10 +45,51 @@ C:\
     
 ```
 
-### The following is a sample screenshot of Apache Kafka was setup on localhost
+### The following is a sample screenshot of Apache Kafka setup on localhost
 
 ![Kafka Setup on Localhost](/docs/artifacts/phase-3/kafka-config-details.png)
 
+
+### Why Apache Kafka 3.2.0?
+
+Apache Kafka 3.2.0 was selected for this project as a stable, well-established Kafka release and to provide practical experience with the traditional ZooKeeper-based Kafka architecture.
+
+The choice also supports the project's learning progression: first understanding the Transactional Outbox Pattern, then introducing Kafka as the event-streaming platform, and finally integrating Debezium CDC.
+
+Kafka 3.2.0 uses ZooKeeper for cluster metadata and controller management. Therefore, in this setup, ZooKeeper is started before the Kafka broker, and Kafka connects to ZooKeeper using:
+
+```properties
+zookeeper.connect=localhost:2181
+
+```
+of 
+
+```properties
+server.properties
+
+```
+![server,properties](/docs/artifacts/phase-3/server-properties.png)
+
+**Architectural limitation:**
+- Kafka 3.2.0 uses the older ZooKeeper architecture in this setup
+- Modern Kafka uses KRaft
+- therefore this is a learning/compatibility choice, not a claim that ZooKeeper is the preferred architecture today
+
+### Start Zookeeper
+
+**Open Windows Powershell**
+
+- Navigate to Kafka folder
+- Run the command to start Zookeeper
+-Keep the terminal open
+```command
+  cd C:\kafka\kafka_2.12-3.2.0
+  bin\windows\zookeeper-server-start.bat config\zookeeper.properties
+```
+**Running Zookeeper Screenshots**
+
+![Zookeeper-start](/docs/artifacts/phase-3/zookeeper-start1.png)
+![Zookeeper-start2](/docs/artifacts/phase-3/zookeeper-start1.png)
 
 
 ← [Back to README](/README.md)
