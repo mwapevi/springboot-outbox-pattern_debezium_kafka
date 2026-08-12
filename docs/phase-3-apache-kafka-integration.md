@@ -91,5 +91,25 @@ server.properties
 ![Zookeeper-start](/docs/artifacts/phase-3/zookeeper-start1.png)
 ![Zookeeper-start2](/docs/artifacts/phase-3/zookeeper-start2.png)
 
+### Start Kafka
+
+**Open Windows Powershell**
+
+- Navigate to Kafka folder
+- Run the command to start Kafka broker
+- Keep the terminal open
+- 
+```command
+  cd C:\kafka\kafka_2.12-3.2.0
+  bin\windows\kafka-server-start.bat config\server.properties
+```
+**Screenshots of Running Kafka Broker**
+![Kafka-startup_1](/docs/artifacts/phase-3/kafka-startup_1.png)
+![Kafka-startup_2](/docs/artifacts/phase-3/kafka-startup_2.png)
+![Kafka-startup_3](/docs/artifacts/phase-3/kafka-startup_3.png)
+![Kafka-startup_4](/docs/artifacts/phase-3/kafka_startup_4.png)
+
+
+
 
 ← [Back to README](/README.md)
